@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>frame_bgimg.jpg</file>
+        <file>login_font.png</file>
+    </qresource>
+</RCC>
