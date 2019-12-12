@@ -1,49 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Frame</class>
- <widget class="QFrame" name="Frame">
-  <property name="windowModality">
-   <enum>Qt::NonModal</enum>
-  </property>
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1001</width>
-    <height>550</height>
+    <width>1071</width>
+    <height>543</height>
    </rect>
   </property>
-  <property name="font">
-   <font>
-    <pointsize>12</pointsize>
-   </font>
-  </property>
   <property name="windowTitle">
-   <string>Frame</string>
-  </property>
-  <property name="toolTip">
-   <string/>
-  </property>
-  <property name="autoFillBackground">
-   <bool>false</bool>
+   <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#Frame
+   <string notr="true">#Form
 {
-	background-image: url(:/image/frame_bgimg.jpg);
+	background-image: url(:/frame_bgimg.jpg);
 }
 </string>
-  </property>
-  <property name="frameShape">
-   <enum>QFrame::StyledPanel</enum>
-  </property>
-  <property name="frameShadow">
-   <enum>QFrame::Raised</enum>
   </property>
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>370</x>
      <y>50</y>
      <width>351</width>
      <height>401</height>
@@ -68,6 +48,22 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
+   <widget class="QLabel" name="Login_font">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>30</y>
+      <width>181</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="ds_work.qrc">:/login_font.png</pixmap>
+    </property>
+   </widget>
    <widget class="QLineEdit" name="Username">
     <property name="geometry">
      <rect>
@@ -81,7 +77,6 @@
      <font>
       <family>黑体</family>
       <pointsize>12</pointsize>
-      <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
@@ -96,9 +91,6 @@
 	background-color:rgba(255,255,255,0.6);
 	border:1px solid black;
 }</string>
-    </property>
-    <property name="text">
-     <string/>
     </property>
     <property name="placeholderText">
      <string>Username:</string>
@@ -117,7 +109,6 @@
      <font>
       <family>黑体</family>
       <pointsize>12</pointsize>
-      <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
@@ -132,9 +123,6 @@
 	background-color:rgba(255,255,255,0.6);
 	border:1px solid black;
 }</string>
-    </property>
-    <property name="text">
-     <string/>
     </property>
     <property name="echoMode">
      <enum>QLineEdit::Password</enum>
@@ -176,26 +164,9 @@
      <string>Login</string>
     </property>
    </widget>
-   <widget class="QLabel" name="Login_font">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>30</y>
-      <width>181</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="ds_work.qrc">:/image/login_font.png</pixmap>
-    </property>
-   </widget>
   </widget>
  </widget>
  <resources>
-  <include location="moshou.jpg"/>
   <include location="ds_work.qrc"/>
  </resources>
  <connections/>
