@@ -52,9 +52,9 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>30</y>
-      <width>181</width>
-      <height>81</height>
+      <y>0</y>
+      <width>201</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="text">

@@ -36,7 +36,7 @@ class Ui_Form(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.Login_font = QtWidgets.QLabel(self.frame)
-        self.Login_font.setGeometry(QtCore.QRect(80, 30, 181, 81))
+        self.Login_font.setGeometry(QtCore.QRect(80, 0, 201, 101))
         self.Login_font.setText("")
         self.Login_font.setPixmap(QtGui.QPixmap(":/login_font.png"))
         self.Login_font.setObjectName("Login_font")
