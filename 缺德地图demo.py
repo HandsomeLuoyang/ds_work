@@ -5,7 +5,6 @@
 '''
     【简介】
 	QWebView打开网页例子
-
 '''
 
 from PyQt5.QtCore import *
@@ -14,6 +13,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import *
 import sys
 from PyQt5.QtWebChannel import *
+
 
 class MainWindow(QMainWindow):
 
@@ -65,7 +65,7 @@ class MainWindow(QMainWindow):
 		'''
                              )
 
-        #路径规划
+        # 路径规划
         self.routePlan = QWebEngineView()
         self.routePlan.setHtml(
             """
@@ -136,7 +136,6 @@ class MainWindow(QMainWindow):
             """
         )
 
-
         bar = self.menuBar()
         map = bar.addMenu("地图")
 
@@ -144,10 +143,8 @@ class MainWindow(QMainWindow):
         map.addAction("重庆市高速路网图")
         map.addAction("功能C")
 
-
-        accident=bar.addMenu("事故")
+        accident = bar.addMenu("事故")
         accident.addAction("产生随机事故点")
-
 
         layout = QHBoxLayout()
         self.items = QDockWidget("事故类型", self)
@@ -166,7 +163,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("缺德地图")
 
         self.setCentralWidget(self.browser)
-        #self.setCentralWidget(self.routePlan)
+        # self.setCentralWidget(self.routePlan)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
