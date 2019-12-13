@@ -22,7 +22,6 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('缺德地图')
         self.setGeometry(5, 30, 1355, 730)
 
-        self.browser = QWebEngineView()
         # 1 加载html代码
         self.browser = QWebEngineView()
         self.browser.setHtml('''
@@ -46,7 +45,7 @@ class MainWindow(QMainWindow):
 </head>
 <body>
 <div id="container"></div>
-<script src="https://webapi.amap.com/maps?v=1.4.13&key=	a47e601337145af1611dfc3d9b09b202"></script>
+<script src="https://webapi.amap.com/maps?v=1.4.13&key=47f6201d035967605a79f0032b5fc154"></script>
 <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
 <script>
     var map = map = new AMap.Map('container', {
