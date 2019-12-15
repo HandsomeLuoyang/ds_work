@@ -15,40 +15,83 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("WebBrowser")  # Set WindowTitle
         self.browser = QWebEngineView()  # Create a browser
         self.setCentralWidget(self.browser)  # Set the browser on the MainWindow
-        self.main_index = """<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
-    <style type="text/css">
-      body,html,#container{
-        width: 100%;
-        height: 100%;
-        margin: 0px
-      }
-    </style>
-    <title>API加载</title>
-  </head>
-  <body>
-    <div id="container" tabindex="0"></div>
-    <script type="text/javascript">
-        window.init = function(){
-            var map = new AMap.Map('container', {
-               resizeEnable: true,
-               center:[106.550464,29.563761],
-               zoom:11
-            });
-            if (location.href.indexOf('guide=1') !== -1) {
-                map.setStatus({scrollWheel: false});
-                map.plugin(["AMap.ToolBar"], function() {
-                  map.addControl(new AMap.ToolBar({liteStyle:true}))
-                });
-            }
-          }
+        self.main_index = """<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>区域掩模</title>
+<style>
+body,html,#container{ margin:0;width: 100%;height: 100%}
+</style>
+</head>
+<body>
+<div id="container"></div>
+<script language="javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=47f6201d035967605a79f0032b5fc154&plugin=Map3D,AMap.DistrictSearch"></script> 
+<script language="javascript">
+
+    var opts = {
+        subdistrict: 0,
+        extensions: 'all',
+        level: 'city'
+    };
+    //利用行政区查询获取边界构建mask路径
+    //也可以直接通过经纬度构建mask路径
+    var district = new AMap.DistrictSearch(opts);
+    district.search('北京市', function(status, result) {
+        var bounds = result.districtList[0].boundaries;
+        var mask = []
+        for(var i =0;i<bounds.length;i+=1){
+            mask.push([bounds[i]])
+        }
+        var map = new AMap.Map('container', {
+            mask:mask,
+            center:[116.472804,39.995725],
+            disableSocket:true,
+            viewMode:'3D',
+            showLabel:false,
+            labelzIndex:130,
+            pitch:40,
+            zoom:9,
+            layers:[
+                new AMap.TileLayer.RoadNet({
+                    //rejectMapMask:true
+                }),
+                new AMap.TileLayer.Satellite()
+            ]
+        });
+        var maskerIn = new AMap.Marker({
+            position:[116.501415,39.926055],
+            map:map
+        })
+        var maskerOut = new AMap.Marker({//区域外的不会显示
+            position:[117.001415,39.926055],
+            map:map
+        })
+        //添加高度面
+        var object3Dlayer = new AMap.Object3DLayer({zIndex:1});
+        map.add(object3Dlayer)
+        var height = -8000;
+        var color = '#0088ffcc';//rgba
+        var wall = new AMap.Object3D.Wall({
+            path:bounds,
+            height:height,
+            color:color
+        });
+        wall.transparent = true
+        object3Dlayer.add(wall)
+        //添加描边
+        for(var i =0;i<bounds.length;i+=1){
+            new AMap.Polyline({
+                path:bounds[i],
+                strokeColor:'#99ffff',
+                strokeWeight:4,
+                map:map
+            })
+        }
+    });
     </script>
-    <script src="https://webapi.amap.com/maps?v=1.4.15&key=47f6201d035967605a79f0032b5fc154&callback=init"></script>
-  </body>
+</body>
 </html>"""
         self.browser.setHtml(self.main_index)
         # self.browser.load(QUrl("https://www.google.com/"))
@@ -130,7 +173,7 @@ class MainWindow(QMainWindow):
         </html>"""
         self.browser.setHtml(html)
         self.browser.reload()
-        self.browser.urlChanged.connect(self.print_new_url)  # Tell me the url when it changed.
+        # self.browser.urlChanged.connect(self.print_new_url)  # Tell me the url when it changed.
 
 
 def main():

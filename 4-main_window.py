@@ -61,7 +61,7 @@ class Main_window(QWidget, Ui_Form):
     var map = new AMap.Map("container", {
         resizeEnable: true,
         center: [106.550464,29.563761],//地图中心点
-        zoom: 13 //地图显示的缩放级别
+        zoom: 8 //地图显示的缩放级别
     });
     //构造路线导航类
    function draw_panel()
