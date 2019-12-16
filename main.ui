@@ -6,26 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1290</width>
+    <width>1179</width>
     <height>814</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>主界面</string>
   </property>
-  <widget class="QPushButton" name="Button_find_shortest_way">
-   <property name="geometry">
-    <rect>
-     <x>1182</x>
-     <y>10</y>
-     <width>101</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>PushButton</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>

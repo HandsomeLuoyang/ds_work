@@ -2,10 +2,9 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.1
+# Created by: PyQt5 UI code generator 5.12
 #
 # WARNING! All changes made in this file will be lost!
-
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -13,10 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(1290, 814)
-        #self.Button_find_shortest_way = QtWidgets.QPushButton(Form)
-        #self.Button_find_shortest_way.setGeometry(QtCore.QRect(1182, 10, 101, 28))
-        #self.Button_find_shortest_way.setObjectName("Button_find_shortest_way")
+        Form.resize(1179, 814)
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setGeometry(QtCore.QRect(1170, 420, 120, 80))
         self.widget.setObjectName("widget")
@@ -33,4 +29,5 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "主界面"))
-        #self.Button_find_shortest_way.setText(_translate("Form", "PushButton"))
+
+
