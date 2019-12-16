@@ -2,19 +2,20 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWebEngineWidgets import *
-from main import Ui_Form
 import sys
+from PyQt5.QtWebChannel import *
 
 
-class Main_window(QMainWindow, Ui_Form):
+class MainWindow(QMainWindow):
     def __init__(self):
-        super(QWidget, self).__init__()
-        self.setupUi(self)
+        QMainWindow.__init__(self)  # init the MainWindow
 
-        self.statusBar().showMessage("Map have ready!")
+        self.setGeometry(200, 50, 1560, 960)  # Set the Geometry
+        self.setWindowTitle("WebBrowser")  # Set WindowTitle
 
-        self.browser = QWebEngineView()
-        # self.browser.setUrl(QUrl("https://www.google.com/"))
+        self.browser = QWebEngineView()  # Create a browser
+        self.setCentralWidget(self.browser)  # Set the browser on the MainWindow
+        # self.browser.load(QUrl("https://www.bing.com/"))  # Load Google
         self.browser.setHtml("""<!doctype html>
 <html>
 <head>
@@ -62,80 +63,38 @@ class Main_window(QMainWindow, Ui_Form):
 <script type="text/javascript">
     //基本地图加载
     var map = new AMap.Map("container", {
-        resizeEnable: true,
+        resizeEnable:true,
         center: [106.550464,29.563761],//地图中心点
-        zoom: 8 //地图显示的缩放级别
+        zoom: 13 //地图显示的缩放级别
     });
     //构造路线导航类
-   function draw_panel()
-  {
-  	var driving = new AMap.Driving({
+    var driving = new AMap.Driving({
         map: map,
         panel: "panel"
     }); 
     // 根据起终点经纬度规划驾车导航路线
-    driving.search(new AMap.LngLat(106.22343, 29.12334), new AMap.LngLat(106.56566, 29.64543), function(status, result) {
+    driving.search(new AMap.LngLat(106.213213, 29.52132), new AMap.LngLat(106.12234, 29.21323), function(status, result) {
         // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
         if (status === 'complete') {
-            log.success('绘制救援路线完成')
+            log.success('救援路线绘制完成！')
         } else {
-            log.error('获取救援路线失败：' + result)
+            log.error('救援路线绘制失败！：' + result)
         }
     });
-  }
-    
 </script>
 </body>
 </html>""")
-        self.verticalLayout.addWidget(self.browser)
+        self.browser.urlChanged.connect(self.print_new_url)  # Tell me the url when it changed.
+        self.show()  # Show window
 
-        bar = self.menuBar()
-
-      #  bar.triggered()
-
-
-        fun1 = QAction('&显示最短路径',self)
-        fun1.setShortcut('Ctrl+S')
-        fun1.setStatusTip("最短路径")
-        fun1.triggered.connect(self.find_shortest_way)
-
-        f1 = bar.addMenu("功能1")
-        f2 = bar.addMenu("功能2")
-        f3 = bar.addMenu("功能3")
-        f4 = bar.addMenu("功能4")
-        f5 = bar.addMenu("功能5")
-
-        f1.addAction(fun1)
-        f1.addAction("temp")
-        f1.addAction("temp")
-        f1.addAction("temp")
-
-        f2.addAction("temp")
-        f2.addAction("temp")
-        f2.addAction("temp")
-        f2.addAction("temp")
-        f2.addAction("temp")
-
-        f3.addAction("temp")
-        f3.addAction("temp")
-        f3.addAction("temp")
-        f3.addAction("temp")
-        f3.addAction("temp")
-
-
-        self.show()
-
-
-    def find_shortest_way(self):
-        from_position = "106.22343, 29.12334"
-        to_position = "106.56566, 29.64543"
-        self.browser.page().runJavaScript("draw_panel()")
+    def print_new_url(self):
+        print(self.browser.url())
 
 
 def main():
     app = QApplication(sys.argv)
-    window = Main_window()
-    window.show()
+    window = MainWindow()
+    # window.show()
     sys.exit(app.exec_())
 
 
