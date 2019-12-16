@@ -13,13 +13,14 @@ from PyQt5.QtGui import *
 from PyQt5.QtWebEngineWidgets import *
 import sys
 
-class Ui_Form(object):
+class Ui_Form(QtWidgets.QWidget):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1179, 814)
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setGeometry(QtCore.QRect(1170, 420, 120, 80))
         self.widget.setObjectName("widget")
+        self.widget.setWindowIcon(QIcon('icon/pictogram_din_e007_rescue_phone_16px_543296_easyicon.net.ico'))
         self.verticalLayoutWidget = QtWidgets.QWidget(Form)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 1181, 821))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
@@ -78,9 +79,60 @@ class Ui_Form(object):
             //基本地图加载
             var map = new AMap.Map("container", {
                 resizeEnable: true,
+                viewMode:'3D',
                 center: [106.550464,29.563761],//地图中心点
                 zoom: 8 //地图显示的缩放级别
             });
+        
+        var icon = new AMap.Icon({
+        image: 'icon\pictogram_din_e007_rescue_phone_256px_543296_easyicon.net.png',
+        size: new AMap.Size(30, 37), //图标大小
+        imageSize: new AMap.Size(30, 37)
+        })
+        
+        var marker1 = new AMap.Marker({
+        position: [106.738211,29.840777],
+        icon:icon,
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker2 = new AMap.Marker({
+        position: [106.351097,29.75598],
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker3 = new AMap.Marker({
+        position: [106.711726,29.498983],
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker4 = new AMap.Marker({
+        position: [106.288054,29.536045],
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker5 = new AMap.Marker({
+        position: [106.444183,29.53087],
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker6 = new AMap.Marker({
+        position: [106.586582,29.352452],
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker7 = new AMap.Marker({
+        position: [106.478209,29.481837],
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker8 = new AMap.Marker({
+        position: [106.456811,29.258333],
+        offset: new AMap.Pixel(-13, -30)
+        });
+
+        var markerList = [marker1,marker2,marker3,marker4,marker5,marker6,marker7,marker8]
+        
+        marker1.setTitle('我是marker的title');
+        marker1.setLabel({
+        offset: new AMap.Pixel(20, 20),  //设置文本标注偏移量
+        direction: 'right' //设置文本标注方位
+         });
+
+        map.add(markerList);
             //构造路线导航类
            function draw_panel()
           {
