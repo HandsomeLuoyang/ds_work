@@ -21,7 +21,11 @@ class MainWindow(QMainWindow):
         super(QMainWindow, self).__init__()
         self.setWindowTitle('缺德地图')
         self.setGeometry(5, 30, 1355, 730)
+<<<<<<< HEAD
         self.browser = QWebEngineView()
+=======
+
+#>>>>>>> 50731b19ac3c7dd511bd5b7bcb14720ffbec597e
         # 1 加载html代码
         self.browser = QWebEngineView()
         self.browser.setHtml('''
@@ -31,8 +35,56 @@ class MainWindow(QMainWindow):
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+<<<<<<< HEAD
     <title>位置经纬度 + 驾车规划路线</title>
     <style type="text/css">
+=======
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <style>
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <title>地图加载完成</title>
+</head>
+<body>
+<div id="container"></div>
+<script src="https://webapi.amap.com/maps?v=1.4.13&key=47f6201d035967605a79f0032b5fc154"></script>
+<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+<script>
+    var map = map = new AMap.Map('container', {
+        zoom:11,
+        resizeEnable: true,
+        viewMode:'3D',
+        center:[106.30316,29.430904]
+    });
+    map.on("complete", function(){
+        log.success("地图加载完成！");
+    });
+</script>
+</body>
+
+</html>
+		'''
+                             )
+
+        # 路径规划
+        self.routePlan = QWebEngineView()
+        self.routePlan.setHtml(
+            """
+            <!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>使用数据自我展示</title>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/AMap.DrivingRender1120.css"/>
+    <style>
+>>>>>>> 50731b19ac3c7dd511bd5b7bcb14720ffbec597e
     html,
     body,
     #container {
