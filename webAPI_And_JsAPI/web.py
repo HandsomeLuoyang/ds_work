@@ -29,6 +29,7 @@ def get_shortest_panel():
     for i in origin_list:
         params["origin"] = i  # Pass in different origin position.
         rtn = requests.get(api_url, params=params)
+        # Transform the json to the dict of python
         result = json.loads(rtn.content)
         distance = result["route"]["paths"][0]["distance"]  # Get the distance.
         distance_dict[i] = int(distance)
