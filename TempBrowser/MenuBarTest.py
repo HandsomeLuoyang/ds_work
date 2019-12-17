@@ -1,7 +1,5 @@
 #! /usr/bin/env python
 # ^_^ coding:utf-8 ^_^
-# !/usr/bin/python3
-# -*- coding:utf-8 -*-
 
 import sys
 from PyQt5.QtWidgets import QMainWindow, QAction, QApplication, qApp
@@ -15,8 +13,8 @@ class Example(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        exitAct = QAction(QIcon('exit.png'), '&Exit', self)
-        exitAct.setShortcut('Ctrl+Q')
+        exitAct = QAction(QIcon("exit.png"), "&Exit", self)
+        exitAct.setShortcut("Ctrl+Q")
         exitAct.setStatusTip("Exit application")
         exitAct.triggered.connect(qApp.quit)
 
@@ -32,7 +30,7 @@ class Example(QMainWindow):
         self.show()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     ex = Example()

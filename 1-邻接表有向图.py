@@ -163,7 +163,9 @@ class pMap:
             else:
                 d[j] = 100000000000  # 否则设置一个非常大的值
 
-        d = dict(sorted(d.items(), key=lambda item: item[1], reverse=True))  # 用字典的value值进行排序，倒序排序
+        d = dict(
+            sorted(d.items(), key=lambda item: item[1], reverse=True)
+        )  # 用字典的value值进行排序，倒序排序
         temp = d.popitem()  # 拿到最小的那个值
         x, y = temp
         name = self.__getNameFromId(x)
@@ -180,7 +182,9 @@ class pMap:
                     value = 0
                 else:
                     continue
-            d = dict(sorted(d.items(), key=lambda item: item[1], reverse=True))  # 每次都要排序，这里考虑用最小堆来优化
+            d = dict(
+                sorted(d.items(), key=lambda item: item[1], reverse=True)
+            )  # 每次都要排序，这里考虑用最小堆来优化
             temp = d.popitem()  # 继续找列表中最小的点，再次循环
             x, y = temp
             name = self.__getNameFromId(x)
