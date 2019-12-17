@@ -71,6 +71,58 @@ class Main_window(QMainWindow, Ui_Form):
         zoom: 8,//地图显示的缩放级别
         viewMode: "3D"
     });
+    
+    var icon = new AMap.Icon({
+        size: new AMap.Size(30, 37), //图标大小
+        imageSize: new AMap.Size(30, 37)
+        })
+        
+        var marker1 = new AMap.Marker({
+        position: [106.738211,29.840777],
+
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker2 = new AMap.Marker({
+        position: [106.351097,29.75598],
+
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker3 = new AMap.Marker({
+        position: [106.711726,29.498983],
+
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker4 = new AMap.Marker({
+        position: [106.288054,29.536045],
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker5 = new AMap.Marker({
+        position: [106.444183,29.53087],
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker6 = new AMap.Marker({
+        position: [106.586582,29.352452],
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker7 = new AMap.Marker({
+        position: [106.478209,29.481837],
+        offset: new AMap.Pixel(-13, -30)
+        });
+        var marker8 = new AMap.Marker({
+        position: [106.456811,29.258333],
+        offset: new AMap.Pixel(-13, -30)
+        });
+
+        var markerList = [marker1,marker2,marker3,marker4,marker5,marker6,marker7,marker8]
+        
+        marker1.setTitle('我是marker的title');
+        marker1.setLabel({
+        offset: new AMap.Pixel(20, 20),  //设置文本标注偏移量
+        direction: 'right' //设置文本标注方位
+         });
+
+        map.add(markerList);
+    
     //构造路线导航类
    function draw_panel(shortest_panel_x, shortest_panel_y)
   {
