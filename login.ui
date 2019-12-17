@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1071</width>
+    <height>543</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#Form
+{
+	background-image: url(:/frame_bgimg.jpg);
+}
+</string>
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>50</y>
+     <width>351</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#frame
+{
+	background-color:rgba(255,255,255,0.15);
+	border-radius:20px;
+	border:3px solid black;
+}
+#frame:hover
+{
+	background-color:rgba(255,255,255,0.3);
+	border:2px solid black;
+}</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="Login_font">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>0</y>
+      <width>201</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="ds_work.qrc">:/login_font.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Username">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>140</y>
+      <width>291</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#Username
+{
+	background-color:rgba(255,255,255,0.4);
+	border-radius:10px;
+	border:2px solid black;
+}
+#Username:hover
+{
+	background-color:rgba(255,255,255,0.6);
+	border:1px solid black;
+}</string>
+    </property>
+    <property name="placeholderText">
+     <string>Username:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Password">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>230</y>
+      <width>291</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#Password
+{
+	background-color:rgba(255,255,255,0.4);
+	border-radius:10px;
+	border:2px solid black;
+}
+#Password:hover
+{
+	background-color:rgba(255,255,255,0.6);
+	border:1px solid black;
+}</string>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+    <property name="placeholderText">
+     <string>Password:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Button_login">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>310</y>
+      <width>291</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#Button_login
+{
+	border-radius:16px;
+	background-color:#134857;
+	font-size:18px;
+	font-family:Microsoft Yahei;
+	color:white;
+}
+#Button_login:hover
+{
+	background-color:#145060;
+}
+#Button_login:pressed
+{
+	background-color:#175565;
+	padding-left:3px;
+	padding-top:3px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Login</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="ds_work.qrc"/>
+ </resources>
+ <connections/>
+</ui>
