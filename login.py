@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 
+import ds_work_rc
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -14,24 +15,24 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1071, 543)
-        Form.setStyleSheet("#Form\n"
-"{\n"
-"    background-image: url(:/frame_bgimg.jpg);\n"
-"}\n"
-"")
+        Form.setStyleSheet(
+            "#Form\n" "{\n" "    background-image: url(:/frame_bgimg.jpg);\n" "}\n" ""
+        )
         self.frame = QtWidgets.QFrame(Form)
         self.frame.setGeometry(QtCore.QRect(370, 50, 351, 401))
-        self.frame.setStyleSheet("#frame\n"
-"{\n"
-"    background-color:rgba(255,255,255,0.15);\n"
-"    border-radius:20px;\n"
-"    border:3px solid black;\n"
-"}\n"
-"#frame:hover\n"
-"{\n"
-"    background-color:rgba(255,255,255,0.3);\n"
-"    border:2px solid black;\n"
-"}")
+        self.frame.setStyleSheet(
+            "#frame\n"
+            "{\n"
+            "    background-color:rgba(255,255,255,0.15);\n"
+            "    border-radius:20px;\n"
+            "    border:3px solid black;\n"
+            "}\n"
+            "#frame:hover\n"
+            "{\n"
+            "    background-color:rgba(255,255,255,0.3);\n"
+            "    border:2px solid black;\n"
+            "}"
+        )
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -46,17 +47,19 @@ class Ui_Form(object):
         font.setFamily("黑体")
         font.setPointSize(12)
         self.Username.setFont(font)
-        self.Username.setStyleSheet("#Username\n"
-"{\n"
-"    background-color:rgba(255,255,255,0.4);\n"
-"    border-radius:10px;\n"
-"    border:2px solid black;\n"
-"}\n"
-"#Username:hover\n"
-"{\n"
-"    background-color:rgba(255,255,255,0.6);\n"
-"    border:1px solid black;\n"
-"}")
+        self.Username.setStyleSheet(
+            "#Username\n"
+            "{\n"
+            "    background-color:rgba(255,255,255,0.4);\n"
+            "    border-radius:10px;\n"
+            "    border:2px solid black;\n"
+            "}\n"
+            "#Username:hover\n"
+            "{\n"
+            "    background-color:rgba(255,255,255,0.6);\n"
+            "    border:1px solid black;\n"
+            "}"
+        )
         self.Username.setObjectName("Username")
         self.Password = QtWidgets.QLineEdit(self.frame)
         self.Password.setGeometry(QtCore.QRect(30, 230, 291, 41))
@@ -64,39 +67,43 @@ class Ui_Form(object):
         font.setFamily("黑体")
         font.setPointSize(12)
         self.Password.setFont(font)
-        self.Password.setStyleSheet("#Password\n"
-"{\n"
-"    background-color:rgba(255,255,255,0.4);\n"
-"    border-radius:10px;\n"
-"    border:2px solid black;\n"
-"}\n"
-"#Password:hover\n"
-"{\n"
-"    background-color:rgba(255,255,255,0.6);\n"
-"    border:1px solid black;\n"
-"}")
+        self.Password.setStyleSheet(
+            "#Password\n"
+            "{\n"
+            "    background-color:rgba(255,255,255,0.4);\n"
+            "    border-radius:10px;\n"
+            "    border:2px solid black;\n"
+            "}\n"
+            "#Password:hover\n"
+            "{\n"
+            "    background-color:rgba(255,255,255,0.6);\n"
+            "    border:1px solid black;\n"
+            "}"
+        )
         self.Password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.Password.setObjectName("Password")
         self.Button_login = QtWidgets.QPushButton(self.frame)
         self.Button_login.setGeometry(QtCore.QRect(30, 310, 291, 51))
-        self.Button_login.setStyleSheet("#Button_login\n"
-"{\n"
-"    border-radius:16px;\n"
-"    background-color:#134857;\n"
-"    font-size:18px;\n"
-"    font-family:Microsoft Yahei;\n"
-"    color:white;\n"
-"}\n"
-"#Button_login:hover\n"
-"{\n"
-"    background-color:#145060;\n"
-"}\n"
-"#Button_login:pressed\n"
-"{\n"
-"    background-color:#175565;\n"
-"    padding-left:3px;\n"
-"    padding-top:3px;\n"
-"}")
+        self.Button_login.setStyleSheet(
+            "#Button_login\n"
+            "{\n"
+            "    border-radius:16px;\n"
+            "    background-color:#134857;\n"
+            "    font-size:18px;\n"
+            "    font-family:Microsoft Yahei;\n"
+            "    color:white;\n"
+            "}\n"
+            "#Button_login:hover\n"
+            "{\n"
+            "    background-color:#145060;\n"
+            "}\n"
+            "#Button_login:pressed\n"
+            "{\n"
+            "    background-color:#175565;\n"
+            "    padding-left:3px;\n"
+            "    padding-top:3px;\n"
+            "}"
+        )
         self.Button_login.setObjectName("Button_login")
 
         self.retranslateUi(Form)
@@ -108,4 +115,3 @@ class Ui_Form(object):
         self.Username.setPlaceholderText(_translate("Form", "Username:"))
         self.Password.setPlaceholderText(_translate("Form", "Password:"))
         self.Button_login.setText(_translate("Form", "Login"))
-import ds_work_rc

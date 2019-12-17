@@ -14,9 +14,11 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("WebBrowser")  # Set WindowTitle
 
         self.browser = QWebEngineView()  # Create a browser
-        self.setCentralWidget(self.browser)  # Set the browser on the MainWindow
+        # Set the browser on the MainWindow
+        self.setCentralWidget(self.browser)
         # self.browser.load(QUrl("https://www.bing.com/"))  # Load Google
-        self.browser.setHtml("""<!doctype html>
+        self.browser.setHtml(
+            """<!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -71,7 +73,7 @@ class MainWindow(QMainWindow):
     var driving = new AMap.Driving({
         map: map,
         panel: "panel"
-    }); 
+    });
     // 根据起终点经纬度规划驾车导航路线
     driving.search(new AMap.LngLat(106.213213, 29.52132), new AMap.LngLat(106.12234, 29.21323), function(status, result) {
         // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
@@ -83,8 +85,11 @@ class MainWindow(QMainWindow):
     });
 </script>
 </body>
-</html>""")
-        self.browser.urlChanged.connect(self.print_new_url)  # Tell me the url when it changed.
+</html>"""
+        )
+        self.browser.urlChanged.connect(
+            self.print_new_url
+        )  # Tell me the url when it changed.
         self.show()  # Show window
 
     def print_new_url(self):

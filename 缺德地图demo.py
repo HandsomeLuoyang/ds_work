@@ -21,11 +21,7 @@ class MainWindow(QMainWindow):
         super(QMainWindow, self).__init__()
         self.setWindowTitle('缺德地图')
         self.setGeometry(5, 30, 1355, 730)
-<<<<<<< HEAD
         self.browser = QWebEngineView()
-=======
-
-#>>>>>>> 50731b19ac3c7dd511bd5b7bcb14720ffbec597e
         # 1 加载html代码
         self.browser = QWebEngineView()
         self.browser.setHtml('''
