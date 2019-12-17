@@ -83,7 +83,6 @@ draw_panel(panel_x, panel_y, accident_point_x, accident_point_y);
 def main():
     app = QApplication(sys.argv)
     window = Main_window()
-    window.accident_appear()
     window.show()
     sys.exit(app.exec_())
 
