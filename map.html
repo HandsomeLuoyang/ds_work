@@ -103,14 +103,15 @@
         map.add(markerList);
 
     //构造路线导航类
-   function draw_panel(shortest_panel_x, shortest_panel_y)
+   function draw_panel(shortest_panel_x, shortest_panel_y, accident_point_x, accident_point_y)
   {
   	var driving = new AMap.Driving({
         map: map,
-        panel: "panel"
+        panel: "panel",
+        policy: AMap.DrivingPolicy.LEAST_DISTANCE
     });
     // 根据起终点经纬度规划驾车导航路线
-    driving.search(new AMap.LngLat(shortest_panel_x, shortest_panel_y), new AMap.LngLat(106.56566, 29.64543), function(status, result) {
+    driving.search(new AMap.LngLat(shortest_panel_x, shortest_panel_y), new AMap.LngLat(accident_point_x, accident_point_y), function(status, result) {
         // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
         if (status === 'complete') {
             log.success('绘制救援路线完成')

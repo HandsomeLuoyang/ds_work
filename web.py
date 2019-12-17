@@ -1,5 +1,6 @@
 import requests
 import json
+import random
 
 
 def get_shortest_panel():
@@ -13,6 +14,14 @@ def get_shortest_panel():
         "output": "JSON",
         "extensions": "base",
     }
+    # Randomly get the accident point.
+    with open("accident_points.txt", "r") as rf:
+        accident_point_list = rf.readlines()
+    # Randomly get one in the points.
+    index = random.randint(0, len(accident_point_list))
+    accident_point = accident_point_list[index]
+    params["destination"] = accident_point
+    print(accident_point)
     # 3.Set the positions.
     origin_list = [
         "106.738211,29.840777",
@@ -37,7 +46,8 @@ def get_shortest_panel():
     # Sort the dict bu value.
     distance_dict = sorted(distance_dict.items(), key=lambda kv: (kv[1], kv[0]))
     # print(distance_dict[0][0].split(","))
-    return distance_dict[0][0].split(",")
+    return distance_dict[0][0].split(",") + accident_point.split(",")
+    # print(distance_dict[0][0].split(",") + accident_point.split(","))
     # 6.Give the panel to JS.
 
 

@@ -1,12 +1,9 @@
-import time
-
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
-from PyQt5.QtGui import *
 from PyQt5.QtWebEngineWidgets import *
 from main import Ui_Form
 import sys
-from webAPI_And_JsAPI.web import get_shortest_panel
+from web import get_shortest_panel
 
 
 class Main_window(QMainWindow, Ui_Form):
@@ -27,7 +24,7 @@ class Main_window(QMainWindow, Ui_Form):
         fun1 = QAction("&显示最短路径", self)
         fun1.setShortcut("Ctrl+S")
         fun1.setStatusTip("最短路径")
-        fun1.triggered.connect(self.find_shortest_way)
+        fun1.triggered.connect(self.accident_appear)
 
         f1 = bar.addMenu("功能1")
         f2 = bar.addMenu("功能2")
@@ -54,13 +51,22 @@ class Main_window(QMainWindow, Ui_Form):
 
         self.show()
 
-    def find_shortest_way(self):
+    def accident_appear(self):
+        """
+        Get a accident position from file random.
+        And draw the shortest panel on the map.
+        """
+        # Pass in the accident point.
         shortest_panel = get_shortest_panel()
         self.browser.page().runJavaScript(
             """var panel_x = {0};
 var panel_y = {1};
-draw_panel(panel_x, panel_y);""".format(
-                shortest_panel[0], shortest_panel[1]
+var accident_point_x = {2};
+var accident_point_y = {3};
+draw_panel(panel_x, panel_y, accident_point_x, accident_point_y);
+        """.format(
+                shortest_panel[0], shortest_panel[1],
+                shortest_panel[2], shortest_panel[3]
             )
         )
 
@@ -77,6 +83,7 @@ draw_panel(panel_x, panel_y);""".format(
 def main():
     app = QApplication(sys.argv)
     window = Main_window()
+    window.accident_appear()
     window.show()
     sys.exit(app.exec_())
 
