@@ -75,7 +75,6 @@ class Web2PyQt5(QWidget, Ui_Form):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    web_pyqt = Web2PyQt5()
     web_pyqt.show()
     channel = QWebChannel()
     shared = Myshared()
