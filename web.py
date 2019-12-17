@@ -21,7 +21,7 @@ def get_shortest_panel():
     index = random.randint(0, len(accident_point_list))
     accident_point = accident_point_list[index]
     params["destination"] = accident_point
-    print("事故发生点坐标：" + accident_point)
+    print("事故发生点坐标：" + accident_point, end="")
     # 3.Set the positions.
     origin_list = [
         "106.738211,29.840777",
@@ -46,6 +46,8 @@ def get_shortest_panel():
     # Sort the dict bu value.
     distance_dict = sorted(distance_dict.items(), key=lambda kv: (kv[1], kv[0]))
     # print(distance_dict[0][0].split(","))
+    print("救援点坐标：" + distance_dict[0][0])
+    # print("救援距离：" + distance_dict[0][1])
     return distance_dict[0][0].split(",") + accident_point.split(",")
     # print(distance_dict[0][0].split(",") + accident_point.split(","))
     # 6.Give the panel to JS.
