@@ -21,7 +21,7 @@ def get_shortest_panel():
     index = random.randint(0, len(accident_point_list))
     accident_point = accident_point_list[index]
     params["destination"] = accident_point
-    print("事故发生点坐标：" + accident_point, end="")
+    print("事故发生点坐标：" + accident_point)
     # 3.Set the positions.
     origin_list = [
         "106.738211,29.840777",

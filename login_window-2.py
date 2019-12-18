@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
 from PyQt5.QtGui import QIcon, QMouseEvent, QPixmap
 from PyQt5 import Qt
 import sys
+from Crypto.Cipher import AES
 
 
 class Main(Ui_Form):
@@ -11,9 +12,20 @@ class Main(Ui_Form):
         self.qwidget = QWidget()
         self.setupUi(self.qwidget)
         self.qwidget.setWindowTitle("欢迎")
+        self.Button_login.clicked.connect(self.login)
 
     def show(self):
         self.qwidget.show()
+
+    def login(self):
+        userName = self.Username.text()
+        passWord = self.Password.text()
+        if not userName or not passWord:
+            QMessageBox.warning(self.qwidget, "温馨提示！", "请输入账户名和密码！")
+            self.Username.setFocus()
+            return
+        else:
+            main_window.main()
 
 
 def main():

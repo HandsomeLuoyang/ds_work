@@ -71,15 +71,6 @@ draw_panel(panel_x, panel_y, accident_point_x, accident_point_y);
         )
 
 
-#         print(
-#             """var panel_x = {0};
-# var panel_y = {1};
-# draw_panel(panel_x, panel_y);""".format(
-#                 shortest_panel[0], shortest_panel[1]
-#             )
-#         )
-
-
 def main():
     app = QApplication(sys.argv)
     window = Main_window()
@@ -87,5 +78,5 @@ def main():
     sys.exit(app.exec_())
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
