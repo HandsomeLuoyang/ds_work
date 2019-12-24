@@ -45,9 +45,18 @@
         }
         
         #forecast {
+            margin-top: 10px;
             color: black;
             font-weight: 600;
             font-size: 19px;
+            line-height: 22px;
+        }
+        
+        #time {
+            color: black;
+            font-weight: 600;
+            font-size: 19px;
+            line-height: 22px;
         }
     </style>
     <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
@@ -59,6 +68,7 @@
 <body>
     <div id="container"></div>
     <div class="info">
+        <p id="time"></p>
         <p id='forecast'></p>
     </div>
     <div id="panel"></div>
@@ -261,6 +271,18 @@
                 }
             });
         }
+
+        function showTime() {
+            var nowtime = new Date();
+            year = nowtime.getFullYear();
+            month = nowtime.getMonth() + 1;
+            date = nowtime.getDate();
+            hours = nowtime.getHours();
+            minutes = nowtime.getMinutes();
+            seconds = nowtime.getSeconds();
+            document.getElementById("time").innerHTML = "当前时间：" + year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+        }
+        setInterval("showTime()", 1000);
     </script>
 </body>
 
