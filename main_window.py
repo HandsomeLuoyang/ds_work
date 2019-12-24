@@ -8,16 +8,21 @@ from web import get_shortest_panel
 
 class Main_window(QMainWindow, Ui_Form):
     def __init__(self):
-        super(QWidget, self).__init__()
+        super(QMainWindow, self).__init__()
         self.setupUi(self)
-
-        self.statusBar().showMessage("Map have ready!")
 
         self.browser = QWebEngineView()
         self.browser.load(QUrl("file:///map.html"))
         self.verticalLayout.addWidget(self.browser)
 
-        bar = self.menuBar()
+        # 主菜单栏
+        self.bar = self.menuBar()
+        self.f1 = self.bar.addMenu("功能1")
+        self.f2 = self.bar.addMenu("功能2")
+        self.f3 = self.bar.addMenu("功能3")
+        self.f4 = self.bar.addMenu("功能4")
+        self.f5 = self.bar.addMenu("地图主题选择")
+        self.setStyleSheet("#bar{background-color:red;}")
 
         #  bar.triggered()
 
@@ -26,29 +31,33 @@ class Main_window(QMainWindow, Ui_Form):
         fun1.setStatusTip("最短路径")
         fun1.triggered.connect(self.accident_appear)
 
-        f1 = bar.addMenu("功能1")
-        f2 = bar.addMenu("功能2")
-        f3 = bar.addMenu("功能3")
-        f4 = bar.addMenu("功能4")
-        f5 = bar.addMenu("功能5")
+        # 卫星地图
+        mapStyle_1 = QAction("&卫星地图", self)
+        mapStyle_1.triggered.connect(self.weixinMap)
 
-        f1.addAction(fun1)
-        f1.addAction("temp")
-        f1.addAction("temp")
-        f1.addAction("temp")
+        # 标准地图
+        mapStyle_base = QAction("&标准地图", self)
+        mapStyle_base.triggered.connect(self.baseMap)
 
-        f2.addAction("temp")
-        f2.addAction("temp")
-        f2.addAction("temp")
-        f2.addAction("temp")
-        f2.addAction("temp")
+        # 实时路况
+        trafficLayer = self.f5.addMenu("实时路况")
+        # 实时路况显示
+        trafficLayer_show = QAction("&显示路况", self)
+        trafficLayer.addAction(trafficLayer_show)
+        trafficLayer_show.triggered.connect(self.trafficLayer_show1)
 
-        f3.addAction("temp")
-        f3.addAction("temp")
-        f3.addAction("temp")
-        f3.addAction("temp")
-        f3.addAction("temp")
+        trafficLayer_hide = QAction("&隐藏路况", self)
+        trafficLayer.addAction(trafficLayer_hide)
+        trafficLayer_hide.triggered.connect(self.trafficLayer_hide1)
 
+        self.f1.addAction(fun1)
+
+        self.f2.addAction("temp")
+
+        self.f3.addAction("temp")
+
+        self.f5.addAction(mapStyle_1)
+        self.f5.addAction(mapStyle_base)
         self.show()
 
     def accident_appear(self):
@@ -68,6 +77,38 @@ draw_panel(panel_x, panel_y, accident_point_x, accident_point_y);
                 shortest_panel[0], shortest_panel[1],
                 shortest_panel[2], shortest_panel[3]
             )
+        )
+
+    def weixinMap(self):
+        """
+        -显示卫星地图
+        :return:
+        """
+        self.browser.page().runJavaScript(
+            """
+                weixinMap();
+                """
+        )
+
+    def trafficLayer_show1(self):
+        self.browser.page().runJavaScript(
+            """
+            trafficLayer_show1();
+            """
+        )
+
+    def trafficLayer_hide1(self):
+        self.browser.page().runJavaScript(
+            """
+            trafficLayer_hide1();
+            """
+        )
+
+    def baseMap(self):
+        self.browser.page().runJavaScript(
+            """
+            baseMap();
+            """
         )
 
 

@@ -1,17 +1,25 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="//webapi.amap.com/ui/1.0/ui/overlay/SimpleMarker/examples/" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <title>位置经纬度 + 驾车规划路线</title>
+
     <style type="text/css">
-    html,
-    body,
-    #container {
-      width: 100%;
-      height: 100%;
-    }
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .info {
+            background-color: rgba(222, 222, 222, 0.3)!important;
+            right: 111rem!important;
+        }
     </style>
     <style type="text/css">
         #panel {
@@ -23,105 +31,237 @@
             right: 10px;
             width: 280px;
         }
+        
         #panel .amap-call {
             background-color: #009cf9;
             border-top-left-radius: 4px;
-   	        border-top-right-radius: 4px;
+            border-top-right-radius: 4px;
         }
+        
         #panel .amap-lib-driving {
-	        border-bottom-left-radius: 4px;
-   	        border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
             overflow: hidden;
+        }
+        
+        #forecast {
+            color: black;
+            font-weight: 600;
+            font-size: 19px;
         }
     </style>
     <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
     <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
-    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=47f6201d035967605a79f0032b5fc154&plugin=AMap.Driving"></script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=47f6201d035967605a79f0032b5fc154&plugin=AMap.Driving,Map3D,AMap.DistrictSearch"></script>
     <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
 </head>
-<body>
-<div id="container"></div>
-<div id="panel"></div>
-<script type="text/javascript">
-    //基本地图加载
-    var map = new AMap.Map("container", {
-        resizeEnable: true,
-        center: [106.550464,29.563761],//地图中心点
-        zoom: 8,//地图显示的缩放级别
-        viewMode: "3D",
-        pitch: "45"
-    });
 
-    var icon = new AMap.Icon({
-        size: new AMap.Size(30, 37), //图标大小
-        imageSize: new AMap.Size(30, 37)
-        })
+<body>
+    <div id="container"></div>
+    <div class="info">
+        <p id='forecast'></p>
+    </div>
+    <div id="panel"></div>
+    <script type="text/javascript">
+        //Todo：1.运用DOM事件 增加救援点。
+        //      2.图层添加与移除 实现卫星地图和一般地图的转化
+        //      3.实现实时路况显示
+        //      4.楼块图层
+        //      5.行政区拾取
+        //      6.地理编码（地址->坐标）
+        //      7.地区行政区规划
+
+
+
+        var lnglat = new AMap.LngLat(106.550464, 29.563761);
+        //基本地图加载
+        var map = new AMap.Map("container", {
+            resizeEnable: true,
+            center: lnglat, //地图中心点
+            defaultCursor: 'pointer',
+            zoom: 8, //地图显示的缩放级别
+            viewMode: "3D",
+            pitch: "45"
+        });
+
+
+
+        //获取用户所在城市信息
+
+        //创建右键菜单
+        var contextMenu = new AMap.ContextMenu();
+        //右键放大
+        contextMenu.addItem("放大一级", function() {
+            map.zoomIn();
+        }, 0);
+        //右键缩小
+        contextMenu.addItem("缩小一级", function() {
+            map.zoomOut();
+        }, 1);
+        //右键显示全国范围
+        contextMenu.addItem("缩放至全国范围", function(e) {
+            map.setZoomAndCenter(4, [108.946609, 34.262324]);
+        }, 2);
+        //右键添加Marker标记
+        contextMenu.addItem("添加标记", function(e) {
+            var marker = new AMap.Marker({
+                map: map,
+                position: contextMenuPositon //基点位置
+            });
+        }, 3);
+
+        //地图绑定鼠标右击事件——弹出右键菜单
+        map.on('rightclick', function(e) {
+            contextMenu.open(map, e.lnglat);
+            contextMenuPositon = e.lnglat;
+        });
+
+
 
         var marker1 = new AMap.Marker({
-        position: [106.738211,29.840777],
-
-        offset: new AMap.Pixel(-13, -30)
+            position: [106.738211, 29.840777],
+            offset: new AMap.Pixel(-13, -30)
         });
-        var marker2 = new AMap.Marker({
-        position: [106.351097,29.75598],
 
-        offset: new AMap.Pixel(-13, -30)
+        //标记点1弹跳
+        marker1.setAnimation('AMAP_ANIMATION_BOUNCE');
+        var marker2 = new AMap.Marker({
+            position: [106.351097, 29.75598],
+
+            offset: new AMap.Pixel(-13, -30)
         });
         var marker3 = new AMap.Marker({
-        position: [106.711726,29.498983],
+            position: [106.711726, 29.498983],
 
-        offset: new AMap.Pixel(-13, -30)
+            offset: new AMap.Pixel(-13, -30)
         });
         var marker4 = new AMap.Marker({
-        position: [106.288054,29.536045],
-        offset: new AMap.Pixel(-13, -30)
+            position: [106.288054, 29.536045],
+            offset: new AMap.Pixel(-13, -30)
         });
         var marker5 = new AMap.Marker({
-        position: [106.444183,29.53087],
-        offset: new AMap.Pixel(-13, -30)
+            position: [106.444183, 29.53087],
+            offset: new AMap.Pixel(-13, -30)
         });
         var marker6 = new AMap.Marker({
-        position: [106.586582,29.352452],
-        offset: new AMap.Pixel(-13, -30)
+            position: [106.586582, 29.352452],
+            offset: new AMap.Pixel(-13, -30)
         });
         var marker7 = new AMap.Marker({
-        position: [106.478209,29.481837],
-        offset: new AMap.Pixel(-13, -30)
+            position: [106.478209, 29.481837],
+            offset: new AMap.Pixel(-13, -30)
         });
         var marker8 = new AMap.Marker({
-        position: [106.456811,29.258333],
-        offset: new AMap.Pixel(-13, -30)
+            position: [106.456811, 29.258333],
+            offset: new AMap.Pixel(-13, -30)
         });
 
-        var markerList = [marker1,marker2,marker3,marker4,marker5,marker6,marker7,marker8]
+        var markerList = [marker1, marker2, marker3, marker4, marker5, marker6, marker7, marker8]
 
         marker1.setTitle('我是marker的title');
         marker1.setLabel({
-        offset: new AMap.Pixel(20, 20),  //设置文本标注偏移量
-        direction: 'right' //设置文本标注方位
-         });
-
+            offset: new AMap.Pixel(20, 20), //设置文本标注偏移量
+            direction: 'right' //设置文本标注方位
+        });
         map.add(markerList);
 
-    //构造路线导航类
-   function draw_panel(shortest_panel_x, shortest_panel_y, accident_point_x, accident_point_y)
-  {
-  	var driving = new AMap.Driving({
-        map: map,
-        panel: "panel",
-        policy: AMap.DrivingPolicy.LEAST_DISTANCE
-    });
-    // 根据起终点经纬度规划驾车导航路线
-    driving.search(new AMap.LngLat(shortest_panel_x, shortest_panel_y), new AMap.LngLat(accident_point_x, accident_point_y), function(status, result) {
-        // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
-        if (status === 'complete') {
-            log.success('绘制救援路线完成')
-        } else {
-            log.error('获取救援路线失败：' + result)
-        }
-    });
-  }
 
-</script>
+        //实时路况图层
+        var trafficLayer = new AMap.TileLayer.Traffic({
+            zIndex: 10
+        });
+        trafficLayer.setMap(map);
+
+        trafficLayer.hide();
+
+        function trafficLayer_show1(e) {
+            trafficLayer.show();
+            trafficLayer.setMap(map);
+        }
+
+        function trafficLayer_hide1(e) {
+            trafficLayer.hide();
+            trafficLayer.setMap(map);
+        }
+
+
+        //鼠标点击事件
+        function showInfoM(e) {
+            var text = '您在 [ ' + e.lnglat.getLng() + ',' + e.lnglat.getLat() + ' ] 的位置点击了marker！'
+            document.querySelector("#text").innerText = text;
+        }
+
+
+        //设置卫星地图
+        var satellite = new AMap.TileLayer.Satellite({
+            map: map
+        });
+
+        satellite.setMap(null);
+
+        function weixinMap(e) {
+            satellite.setMap(map);
+        }
+        //标准地图
+        function baseMap(e) {
+            satellite.setMap(null);
+        }
+
+        function showCityInfo() {
+            //实例化城市查询类
+            var citysearch = new AMap.CitySearch();
+            //自动获取用户IP，返回当前城市
+            citysearch.getLocalCity(function(status, result) {
+                if (status === 'complete' && result.info === 'OK') {
+                    if (result && result.city && result.bounds) {
+                        var cityinfo = result.city;
+                        var citybounds = result.bounds;
+                        document.getElementById('info').innerHTML = '您当前所在城市：' + cityinfo;
+                        //地图显示当前城市
+                        map.setBounds(citybounds);
+                    }
+                } else {
+                    document.getElementById('info').innerHTML = result.info;
+                }
+            });
+        }
+        AMap.plugin('AMap.Weather', function() {
+            var weather = new AMap.Weather();
+            //查询实时天气信息, 查询的城市到行政级别的城市，如朝阳区、杭州市
+            weather.getLive('重庆市', function(err, data) {
+                if (!err) {
+                    var str = [];
+                    str.push('<p>实时天气' + '<p><hr>');
+                    str.push('<p>城市/区：' + data.city + '</p>');
+                    str.push('<p>天气：' + data.weather + '</p>');
+                    str.push('<p>温度：' + data.temperature + '℃</p>');
+                    str.push('<p>风向：' + data.windDirection + '</p>');
+                    str.push('<p>风力：' + data.windPower + ' 级</p>');
+                    str.push('<p>空气湿度：' + data.humidity + '</p>');
+                    str.push('<p>发布时间：' + data.reportTime + '</p>');
+                    document.getElementById('forecast').innerHTML = str.join('<br>');
+                }
+            });
+        });
+
+        //构造路线导航类
+        function draw_panel(shortest_panel_x, shortest_panel_y, accident_point_x, accident_point_y) {
+            var driving = new AMap.Driving({
+                map: map,
+                panel: "panel",
+                policy: AMap.DrivingPolicy.LEAST_DISTANCE
+            });
+            // 根据起终点经纬度规划驾车导航路线
+            driving.search(new AMap.LngLat(shortest_panel_x, shortest_panel_y), new AMap.LngLat(accident_point_x, accident_point_y), function(status, result) {
+                // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+                if (status === 'complete') {
+                    log.success('绘制救援路线完成')
+                } else {
+                    log.error('获取救援路线失败：' + result)
+                }
+            });
+        }
+    </script>
 </body>
+
 </html>

@@ -6,30 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1179</width>
-    <height>814</height>
+    <width>1720</width>
+    <height>960</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>主界面</string>
   </property>
-  <widget class="QWidget" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>1170</x>
-     <y>420</y>
-     <width>120</width>
-     <height>80</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>20</y>
-     <width>1181</width>
-     <height>801</height>
+     <width>1721</width>
+     <height>941</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout"/>
