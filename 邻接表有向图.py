@@ -71,7 +71,8 @@ class pMap:
         if not isinstance(name, str):
             print("请输入正确的城市名字！", name)
             return
-        temp = Node(name, self.m_iCursize)  # 同时给这个节点的id赋值，用户使用名字查找，我们内部使用id进行操作
+        # 同时给这个节点的id赋值，用户使用名字查找，我们内部使用id进行操作
+        temp = Node(name, self.m_iCursize)
         self.m_pNode.append(temp)  # 直接添加一个节点进去
         self.m_iCursize += 1
 
@@ -150,7 +151,8 @@ class pMap:
             return
         ok = list()  # 已经计算好最短路径的节点
         ok.append(orgid)  # 初始点设置为已经记录好最短路径了
-        no_ok = [i for i in range(self.m_iCursize) if i != orgid]  # 没有计算好最短路径的节点
+        no_ok = [i for i in range(self.m_iCursize)
+                 if i != orgid]  # 没有计算好最短路径的节点
         d = dict()  # d是存放计算过程中距离的字典
         ans = dict()  # ans是存放最终得出的距离的字典
 
@@ -167,9 +169,9 @@ class pMap:
             sorted(d.items(), key=lambda item: item[1], reverse=True)
         )  # 用字典的value值进行排序，倒序排序
         temp = d.popitem()  # 拿到最小的那个值
-        x, y = temp
+        x, y = temp  # 拆包
         name = self.__getNameFromId(x)
-        ans[name] = y
+        ans[name] = y  # 每一次的最小值已经是最短路径了
         while d and no_ok:  # 字典为空，代表所有节点都已经计算出最终长度，或者所有点都已经找到了最短路径
             ok.append(temp[0])  # 最小的那个直接加进去
             no_ok.remove(temp[0])  # 从标识没好的列表里面把这个点去掉

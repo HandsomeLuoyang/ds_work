@@ -7,7 +7,7 @@ from PyQt5.QtWebChannel import *
 import time
 
 
-class MainWindow(QMainWindow):
+class Visiual_Window(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)  # init the MainWindow
 
@@ -21,7 +21,7 @@ class MainWindow(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
-    window = MainWindow()
+    window = Visiual_Window()
     window.show()
     sys.exit(app.exec_())
 
